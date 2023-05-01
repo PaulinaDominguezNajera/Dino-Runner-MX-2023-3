@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, CLOUD, CLOUD_2
 from dino_runner.components.dinosaur import Dinosaur
 
 class Game:
@@ -14,6 +14,12 @@ class Game:
         self.game_speed = 20
         self.x_pos_bg = 0
         self.y_pos_bg = 380
+        self.cloud_speed = 11
+        self.x_pos_cloud = 700
+        self.y_pos_cloud = 70
+        self.cloud_2_speed = 11
+        self.x_pos_cloud_2 = 300
+        self.y_pos_cloud_2 = 45
         self.player = Dinosaur()
 
     def run(self):
@@ -50,3 +56,18 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+        
+        self.screen.blit(CLOUD, (self.x_pos_cloud, self.y_pos_cloud))
+        self.screen.blit(CLOUD, (image_width + self.x_pos_cloud, self.y_pos_cloud))
+        if self.x_pos_cloud <= -image_width:
+            self.screen.blit(CLOUD, (image_width + self.x_pos_cloud, self.y_pos_cloud))
+            self.x_pos_cloud = image_width
+        self.x_pos_cloud -= self.cloud_speed
+
+        self.screen.blit(CLOUD_2, (self.x_pos_cloud_2, self.y_pos_cloud_2))
+        self.screen.blit(CLOUD_2, (image_width + self.x_pos_cloud_2, self.y_pos_cloud_2))
+        if self.x_pos_cloud_2 <= -image_width:
+            self.screen.blit(CLOUD_2, (image_width + self.x_pos_cloud_2, self.y_pos_cloud_2))
+            self.x_pos_cloud_2 = image_width
+        self.x_pos_cloud_2 -= self.cloud_2_speed
+
